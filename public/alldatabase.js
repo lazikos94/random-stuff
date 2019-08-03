@@ -21,6 +21,8 @@
                 time.textContent = dateString;
                 image.src = item.image64;
                 image.alt="picture of user";
+                image.height="200";
+                image.width="300";
 
                 //console.log(time,image,ltlg,weathers,weathert,weatherh,feel);
                 if (item.sum_of_person != null){

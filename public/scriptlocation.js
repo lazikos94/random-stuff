@@ -38,9 +38,9 @@ function setup(){
       const json = await response.json();
       console.log(json.aq.results[21]);
       weather = {
-        sum:json.weather.currently.summary,
-        temp:json.weather.currently.temperature,
-        hum:json.weather.currently.humidity
+        sum: json.weather.currently.summary,
+        temp: json.weather.currently.temperature,
+        hum: json.weather.currently.humidity
       }
       feel = 'feeling ' + document.getElementById('feel').value;
       const marker = L.marker([lat, lng]).addTo(mymap)

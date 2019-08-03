@@ -26,12 +26,7 @@
               const temp = document.createElement('div').textContent = `${item.iss.hm} `;
               const hum = document.createElement('div').textContent = `${item.iss.tmp} `;
               const time = document.createElement('div').textContent = new Date(item.time).toLocaleString();
-              root.append(lat,lng,alt,weather,temp,hum,time)
-              document.body.append(root);
-            }
-
-            /*for (item of data){
-                const root = document.createElement('div');
+              const root = document.createElement('div');
                 const ltlg= document.createElement('div');
                 const time= document.createElement('div');
                 const fname= document.createElement('div');
@@ -56,9 +51,12 @@
                 image.src = item.image64;
                 image.alt="picture of user";
 
+              root.append(image,lat,lng,alt,weather,temp,hum,time,time,ltlg,fname,sname,age,weathers,weathert,weatherh,feel);
+              document.body.append(root);
+            }
 
-                root.append(image,time,ltlg,fname,sname,age,weathers,weathert,weatherh,feel);
-                document.body.append(root);
+            /*for (item of data){
+                
             }*/
         }
     </script>

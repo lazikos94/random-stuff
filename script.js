@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 require('dotenv').config();
 
 const app = express(); 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 app.use(cors());
 app.listen(port, ()=> console.log('listening'));
 app.use(express.static('public'));

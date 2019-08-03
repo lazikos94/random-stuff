@@ -1,7 +1,6 @@
 const Datastore = require('nedb');
 const cors = require('cors');
 const express = require('express');
-const multer = require('multer');
 const fetch = require('node-fetch');
 
 require('dotenv').config();

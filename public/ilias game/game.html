@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="utf-8">
+
+	<style>
+		canvas
+		{
+			border: 1px solid #000000;
+			background-color: #f1f1f1;
+		}
+	</style>
+</head>
+
+<body onload="startGame()">
+	<script>
+		var player;
+		var background;
+		var line;
+
+		var velX = 0;
+		var velY = 0;
+
+		var right = false;
+		var left = false;
+		var up = false;
+		var down = false;
+		var respawn = false;
+
+		var score = 0;
+
+		function startGame()
+		{
+			game.Start();
+			player = new component(80, 120, "car.png", 220, 600, "image");
+			background = new component(480, 720, "road.png", 0, 0, "image");
+			line = [
+				new component(16,240, "line.png", 232, 0, "image"),
+				new component(16,240, "line.png", 232, 240, "image"),
+				new component(16,240, "line.png", 232, 480, "image"),
+				new component(16,240, "line.png", 232, 720, "image")
+			];
+		}
+
+		var game = 
+		{
+			canvas : document.createElement("canvas"),
+			Start : function() 
+			{
+				this.canvas.width = 480;
+				this.canvas.height = 720;
+				this.context = this.canvas.getContext("2d");
+				document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+				this.interval = setInterval(UpdateGame, 20);
+			},
+			drawscore : function () {
+				ctx.font = "26px Arial";
+				ctx.fillStyle = "#ffffff";
+				if(!dead)
+				ctx.fillText("score:" + score ,85,30);
+			},
+			gameover: function()
+			{
+				if(!dead)return;
+				ctx.font = "28px Arial";
+				ctx.fillStyle = "#000000";
+				ctx.fillText("You are dead,", 50, 150);
+				ctx.fillText("press space to respawn",50,168);
+			}
+		}
+
+		function enemycar(x, y, width, height, speed)
+		{
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+			var enemy = new component(width, height, "car.png", x, y, "image");
+			this.update = function()
+			{
+				enemy.Update();
+				enemy.y += speed;
+				enemy.rs += speed;
+				this.y += speed;
+
+			}
+		}
+
+		function component(width, height, color, x, y, type)
+		{
+			this.type = type;
+			if(type == "image")
+			{
+				this.image = new Image();
+        		this.image.src = color;
+			}
+			this.width = width; 
+			this.height = height; 
+			this.x = x;
+			this.y = y;
+			
+			this.rs = x + width;
+			this.ls = x;
+			this.ts = y;
+			this.ds = y + height;
+
+			this.Update = function()
+			{
+				ctx = game.context;
+				if(type == "image")
+				{
+					ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+				}
+				else
+				{
+					ctx.fillStyle = color;
+					ctx.fillRect(this.x, this.y, this.width, this.height);
+				}
+			}
+		}
+
+		function UpdateGame()
+		{
+			if(respawn)dead = false;
+			background.Update();
+			UpdateRoad();
+			player.Update();
+			game.gameover();
+			GenerateEnemyCars();
+			if(enemy != null)enemy.update();
+			GameOver();
+			Move();
+			PlayerBorder();
+			UpdatePos();
+			
+			if(collision(player, enemy))
+			{
+				dead = true;
+				score = 0;	
+			}
+			game.drawscore();
+		}
+
+		var dead = false;
+		function GameOver(ctx)
+		{
+			if(dead)
+			{
+				up = false;
+				down = false;
+				right = false;
+				left = false;
+			}
+		}
+
+		function PlayerBorder()
+		{
+			if(player.x < 64)player.x = 64;
+			if((player.x + player.width) > 448)player.x = 448 - player.width;
+		}
+
+		function UpdateRoad()
+		{
+			for (var i = 0; i <= 3; i++) 
+			{
+				line[i].Update();
+				line[i].y += 5;
+				if(line[i].y >= 720)line[i].y = line[i].y = -240;
+			}
+		}
+
+		function Move()
+		{
+			//Accelerations
+			if(right)velX += 0.9;
+			else if(left)velX -= 0.9;
+			
+			else if(velX > 0)velX -= 0.7;
+			else if(velX < 0)velX += 0.7;
+
+			if(velX <= 0.7 && velX >= -0.7)velX = 0;
+			
+			if(up)velY -= 0.9;
+			else if(down)velY += 0.9;
+			
+			else if(velY > 0)velY -= 0.7;
+			else if(velY < 0)velY += 0.7;
+			
+			if(velY <= 0.7 && velY >= -0.7)velY = 0;
+			
+			//Speed Limits
+			if(velX > 10)velX = 10;
+			if(velY > 10)velY = 10;
+			if(velX < -10)velX = -10;
+			if(velY < -10)velY = -10;
+
+			//Updating position
+			player.x += velX;
+			player.y += velY;
+			/*
+			//Debug	
+			console.log("Speed on X axis is: ", velX);
+			console.log("Speed on Y axis is: ", velY);
+			console.log("Right key is: ", right);
+			console.log("Left key is: ", left);
+			console.log("Up key is: ", up);
+			console.log("Down key is: ", down);
+			*/
+		}
+
+		function UpdatePos()
+		{
+			player.rs = player.x + player.width;
+			player.ls = player.x;
+			player.ds = player.y + player.height;
+			player.ts = player.y;
+
+			enemy.rs = enemy.x + enemy.width;
+			enemy.ls = enemy.x;
+			enemy.ds = enemy.y + enemy.height;
+			enemy.ts = enemy.y;
+		}
+
+		var timer = 0;
+		var spawnpos = 0;
+		var enemy = new enemycar(100, -120, 80 ,120, 9);
+		function GenerateEnemyCars()
+		{
+			var shouldenemyspawn = false;
+			timer++;
+			if(timer >= 100)
+			{
+				score += 10;
+				shouldenemyspawn = true;
+				timer = 0;
+			}
+
+			if(shouldenemyspawn)
+			{
+				spawnpos = Math.floor(Math.random() * 3);				
+				switch(spawnpos)
+				{
+					case 0:
+						enemy = new enemycar(100, -120, 80 ,120, 9);
+						break;
+					case 1:
+						enemy = new enemycar(200, -120, 80 ,120, 9);
+						break;
+					case 2:
+						enemy = new enemycar(300, -120, 80 ,120, 9);
+						break;
+				}
+			}	
+		}
+
+		function collision(me, other)
+		{
+			/*Debug
+			console.log("my TS is: ", me.ts);
+			console.log("my RS is: ", me.rs);
+			console.log("my LS is: ", me.ls);
+			console.log("my DS is: ", me.ds);
+
+			console.log("other TS is: ", other.ts);
+			console.log("other RS is: ", other.rs);
+			console.log("other LS is: ", other.ls);
+			console.log("other DS is: ", other.ds);
+			*/
+
+			if(me == null || other == null)return false;
+			
+			if(	(me.ts < other.ds && 
+				 me.ts > other.ts && 
+				 me.rs > other.ls && 
+				 me.rs < other.rs)||
+				//case 1
+
+				(me.ls < other.rs && 
+				 me.ls > other.ls && 
+				 me.ts < other.ds && 
+				 me.ts > other.ts)||
+				//case 2
+
+				(me.rs > other.rs && 
+				 me.rs < other.ls && 
+				 me.ds < other.ds && 
+				 me.ds > other.ts)||
+				//case 3
+
+				(me.ls < other.rs && 
+				 me.ls > other.ls && 
+				 me.ds > other.ts && 
+				 me.ds < other.ds))
+				//case 4
+
+				return true;
+			else return false;
+		}
+
+		document.onkeydown = function(event)
+		{
+			if(event.keyCode === 68) //d
+				right = true;
+			else if(event.keyCode === 83) //s
+				down = true
+			else if(event.keyCode === 65) //a
+				left = true;
+			else if(event.keyCode === 87) //w
+				up = true;
+			else if(event.keyCode === 32 && dead) // space
+			{
+				respawn = true;
+				timer = 0;
+				enemy = new enemycar(100, -120, 80 ,120, 9);
+				player = new component(80, 120, "car.png", 220, 600, "image");
+			}
+		}
+
+		document.onkeyup = function(event)
+		{
+			if(event.keyCode === 68) //d
+				right = false;
+			else if(event.keyCode === 83) //s
+				down = false
+			else if(event.keyCode === 65) //a
+				left = false;
+			else if(event.keyCode === 87) //w
+				up = false;
+			else if(event.keyCode === 32) // space
+				respawn = false;
+		}
+
+	</script>
+</body>
+
+</html>

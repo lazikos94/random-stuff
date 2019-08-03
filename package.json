@@ -1,15 +1,8 @@
 {
   "name": "serverstuff",
   "version": "1.0.0",
-  "description": "data selfie app",
+  "description": "its guccci stuff",
   "main": "script.js",
-  "keywords": [
-    "example",
-    "data",
-    "selfie"
-  ],
-  "author": "me",
-  "license": "MIT",
   "dependencies": {
     "bower": "^1.8.8",
     "cors": "^2.8.5",
@@ -20,5 +13,20 @@
     "nedb": "^1.8.0",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazikos94/random-stuff.git"
+  },
+  "author": "lazaros adamos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lazikos94/random-stuff/issues"
+  },
+  "homepage": "https://github.com/lazikos94/random-stuff#readme"
 }

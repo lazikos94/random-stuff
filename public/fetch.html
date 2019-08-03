@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>fetch stuff</title>
+    <style>
+    #submit{
+      background-color: darkred; /* Green */
+      border-radius: 15px; 
+      color: black;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+     }
+     #submit:hover{
+      background-color: white; /* Green */
+      color: darkred;
+     }
+    </style>
+  </head>
+  <body>
+    <h1>Poem And Pics</h1>
+    <p id='poem'></p>
+    <label for="input">Submit something of your own</label>
+    <input id="input" value="" /><button id="submit">submit</button><br/>
+    <script src="scriptfetch.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>user data</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <style>
+            #submit{
+              background-color: darkred; /* Green */
+              border-radius: 15px; 
+              color: black;
+              padding: 10px 20px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 16px;
+              box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+              -webkit-transition-duration: 0.4s; /* Safari */
+              transition-duration: 0.4s;
+             }
+             #submit:hover{
+              background-color: white; /* Green */
+              color: darkred;
+             }
+             #disimg{
+               max-width: 180px;
+             }
+            </style>
+  </head>
+  <body>
+        <label for="firstname">Firstname: </label>
+        <input id="firstname" type="text" value="" /><br/>
+        <label for="surname">Surname: </label>
+        <input id="surname" type="text" value="" /><br/>
+        <label for="age">Age: </label>
+        <input id="age" type="number" value="" /><br/>
+
+        <form action="/api">
+          <input type="file" name="pic" id="pic" accept="image/*" onchange="readURL(this);"/>
+          <img id="disimg" src="http://placehold.it/180" alt="your image" />
+        </form><br/>
+        
+        <button id="submit">submit</button><br/>
+
+        <script src="datafromuser.js"></script>
+  </body>
+</html>

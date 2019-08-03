@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ISS data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js" integrity="sha256-WVsM3xrcqyuFNF3W1qtIKbHFsD0977nDQA8DCMp1zCw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js" integrity="sha256-2/3R3NV5zryj0fDjD3cDh+SNiWQ/TJiMVZzAo5FrhiU=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1>ISS live data</h1>
+    <script>
+        getData();
+        async function getData(){
+            const response = await fetch('/api');
+            const data = await response.json();
+            console.log(data);
+
+            for (item of data){
+              const root = document.createElement('p');
+              const lat = document.createElement('div').textContent =`${item.iss.lt}°, `;
+              const lng = document.createElement('div').textContent = `${item.iss.lon}° `;
+              const alt = document.createElement('div').textContent = `${item.iss.alt} `;
+              const weather = document.createElement('div').textContent = `${item.iss.wth} `;
+              const temp = document.createElement('div').textContent = `${item.iss.hm} `;
+              const hum = document.createElement('div').textContent = `${item.iss.tmp} `;
+              const time = document.createElement('div').textContent = new Date(item.time).toLocaleString();
+              root.append(lat,lng,alt,weather,temp,hum,time)
+              document.body.append(root);
+            }
+
+            /*for (item of data){
+                const root = document.createElement('div');
+                const ltlg= document.createElement('div');
+                const time= document.createElement('div');
+                const fname= document.createElement('div');
+                const sname= document.createElement('div');
+                const age= document.createElement('div');
+                const weathers = document.createElement('div');
+                const weathert = document.createElement('div');
+                const weatherh = document.createElement('div');
+                const feel = document.createElement('div');
+                const image= document.createElement('img');
+
+                feel.textContent = item.feel;
+                weathers.textContent = item.weather.sum;
+                weathert.textContent = `${item.weather.temp}°`;
+                weatherh.textContent = item.weather.hum;
+                fname.textContent = item.firstname;
+                sname.textContent = item.surname;
+                age.textContent = item.age;
+                ltlg.textContent = `${item.lat}°, ${item.lng}°`;
+                const dateString = new Date(item.time).toLocaleString();
+                time.textContent = dateString;
+                image.src = item.image64;
+                image.alt="picture of user";
+
+
+                root.append(image,time,ltlg,fname,sname,age,weathers,weathert,weatherh,feel);
+                document.body.append(root);
+            }*/
+        }
+    </script>
+  </body>
+</html>

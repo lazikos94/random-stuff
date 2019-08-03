@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+      integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+      crossorigin=""></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js" integrity="sha256-WVsM3xrcqyuFNF3W1qtIKbHFsD0977nDQA8DCMp1zCw=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js" integrity="sha256-2/3R3NV5zryj0fDjD3cDh+SNiWQ/TJiMVZzAo5FrhiU=" crossorigin="anonymous"></script>
+   <style>
+     #mapid{
+       height: 180px
+     }
+     #location{
+      background-color: darkred; /* Green */
+      border-radius: 15px; 
+      color: black;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+     }
+     #location:hover{
+      background-color: white; /* Green */
+      color: darkred;
+     }
+     #send{
+      background-color: darkred; /* Green */
+      border-radius: 15px; 
+      color: black;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+     }
+     #send:hover{
+      background-color: white; /* Green */
+      color: darkred;
+     }
+   </style>
+    <script></script>
+    <title>Locale</title>
+  </head>
+  <body>
+      <p id="demo"></p>
+    <h1>Locale Info</h1>
+    <p>
+        <br>latitude: <span id="lat"></span>
+        <br>longitude: <span id="lng"></span>
+    </p><br/>
+    <label for="feel">how are you feeling:</label><br/>
+    <input id="feel" type="text" value="" /><br/>
+    <button id="location">show location</button><button id="send">send</button><br/>
+    <p></p>
+    <div id="mapid"></div>
+    <p>
+      the weather is <span id="weather"></span><br/>
+      the temperature is <span id= "temp"></span> degrees °C<br/>  
+    </p>
+
+    <script src="scriptlocation.js"></script>
+  </body>
+</html>

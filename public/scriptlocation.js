@@ -4,24 +4,23 @@ function setup(){
   const video = createCapture(VIDEO);
   video.size(320,240);
 
-  let lat,lng;
-  let weather = {
-  };
+  let lat_of_person,lng_of_person;
+
   let feel;
+  let sum_of_person,temp_of_person,hum_of_person;
 
   document.getElementById('location').addEventListener('click',async event=> {
   if ("geolocation" in navigator) {
       console.log('geolocation available');
       navigator.geolocation.getCurrentPosition(async position => {
       try{
-      //console.log(position);
       
-      lat = position.coords.latitude;
-      lng = position.coords.longitude;
+      lat_of_person = position.coords.latitude;
+      lng_of_person = position.coords.longitude;
   
-      document.getElementById('lat').textContent= lat + '°';
-      document.getElementById('lng').textContent= lng + '°';
-      const mymap = L.map('mapid').setView([lat,lng], 14);
+      document.getElementById('lat').textContent= lat_of_person + '°';
+      document.getElementById('lng').textContent= lng_of_person + '°';
+      const mymap = L.map('mapid').setView([lat_of_person,lng_of_person], 14);
 
       const stuff={
         attribution : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -33,25 +32,21 @@ function setup(){
       const tiles = L.tileLayer(stuff.tileURL,stuff.attribution,{id: 'mapbox.streets'});
       tiles.addTo(mymap);
       //const weather_api ='weather/ ${lat},${lng}';
-      const url_api = `weather/${lat},${lng}`;
+      const url_api = `weather/${lat_of_person},${lng_of_person}`;
       const response = await fetch(url_api);
       const json = await response.json();
-      console.log(json.aq.results[21]);
-      weather = {
-        msum: json.weather.currently.summary,
-        mtemp: json.weather.currently.temperature,
-        mhum: json.weather.currently.humidity
-      }
+  
+
+      sum_of_person = json.weather.currently.summary;
+      temp_of_person =  json.weather.currently.temperature;
+      hum_of_person = json.weather.currently.humidity;
+      
       feel = 'feeling ' + document.getElementById('feel').value;
-      const marker = L.marker([lat, lng]).addTo(mymap)
-      .bindPopup(`my location is latitude: ${lat}°, logitude: ${lng}°, 
-      the weather is ${weather.sum} with temperature ${weather.temp}°C
-      and humidity is ${weather.hum} and im ${feel}`)
+      const marker = L.marker([lat_of_person, lng_of_person]).addTo(mymap)
+      .bindPopup(`my location is latitude: ${lat_of_person}°, logitude: ${lng_of_person}°, 
+      the weather is ${sum_of_person} with temperature ${temp_of_person}°C
+      and humidity is ${hum_of_person} and im ${feel}`)
       .openPopup()
-      //document.getElementById('aq').textContent = json.aq.results[21].measurements.parameter=pm25;
-      //document.getElementById('aq_val').textContent = json.aq.results.measurements.value;
-      //document.getElementById('aq_units').textContent = json.aq.results.measurements.units;
-      //document.getElementById('aq_date').textContent = json.aq.results.measurements.lastUpdated;
       document.getElementById('weather').textContent = json.weather.currently.summary;
       document.getElementById('temp').textContent = json.weather.currently.temperature;
       console.log(json);
@@ -71,8 +66,7 @@ function setup(){
       video.loadPixels();
       const image64 = video.canvas.toDataURL();
       feel = 'feeling ' + document.getElementById('feel').value;
-      const data = { lat, lng ,image64, weather ,feel};
-      document.getElementById("demo").innerHTML = JSON.stringify(data);
+      const data = { lat_of_person, lng_of_person ,image64,sum_of_person,temp_of_person,hum_of_person ,feel};
       const options = {
         method: 'POST',
         headers: {

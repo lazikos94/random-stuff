@@ -23,8 +23,6 @@
       const data = await responce.json();
       //console.log(data.latitude);
       //console.log(data.longitude);
-
-
       const {latitude,longitude,altitude}= data ;
       const url_api = `weather/${latitude},${longitude}`;
       const weather_response = await fetch(url_api);
@@ -33,14 +31,12 @@
       // if(firstTime){
       mymap.setView([latitude,longitude],2);
       // firstTime=false;
-      iss = {
-        wth : json.weather.currently.summary,
-        tmp : json.weather.currently.temperature,
-        hm : json.weather.currently.humidity,
-        lt : latitude,
-        lon : longitude,
-        alt : altitude
-      }
+      const issweather = json.weather.currently.summary;
+      const isstemp = json.weather.currently.temperature;
+      const isshum = json.weather.currently.humidity;
+      const isslat = latitude;
+      const isslng = longitude;
+      const issalt = altitude;
       //console.log(latitude,longitude);
       document.getElementById('weather').textContent=json.weather.currently.summary;
       document.getElementById('temp').textContent=json.weather.currently.temperature;
@@ -49,7 +45,7 @@
       document.getElementById('lon').textContent=longitude;
       document.getElementById('alt').textContent=altitude;
 
-      const issinfo = {iss};
+      const issinfo = {issweather,isstemp,isshum,isslat,isslng,issalt};
       const options = {
       method: 'POST',
       headers: {

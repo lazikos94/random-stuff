@@ -21,6 +21,12 @@ app.get('/api',(request, response)=>{
     });                      
 });
 
+app.get('/iss',(request, response)=>{
+    database.find({iss}, (err,data)=>{
+        response.json(data);
+    });                      
+});
+
 app.post('/api', (request,response)=>{
     const data = request.body;
     console.log(request.body);
@@ -47,15 +53,16 @@ app.get('/weather/:latlng', async (request,response)=>{
     const weather_json = await weather_response.json();
     console.log(weather_json);
 
-    const aq_api = `https://api.openaq.org/v1/measurements`;
+    /*const aq_api = `https://api.openaq.org/v1/measurements`;
     const aq_response = await fetch(aq_api);
     const aq_json = await aq_response.json();
-    console.log(aq_json);
+    console.log(aq_json);*/
 
     const data = {
         weather: weather_json,
-        aq: aq_json,
+        //aq: aq_json,
     };
     response.json(data);
+    //database.insert(data);
 });
 

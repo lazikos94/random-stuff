@@ -85,8 +85,8 @@ function setup() {
                 validationSplit: 0.1,
                 metrics: ['accuracy'],
                 callbacks:{
-                    onTrainBegin: ()=> console.log('training started'),
-                    onTrainEnd: ()=> console.log('training done'),
+                    onTrainBegin: ()=> console.log('training started')+ alert('training started'),
+                    onTrainEnd: ()=> console.log('training done') + alert('training done'),
                     onBatchEnd: async(num,logs) =>{
                         await tf.nextFrame();
                     },

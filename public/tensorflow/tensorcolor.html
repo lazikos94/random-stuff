@@ -6,12 +6,17 @@
   <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-database.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+<link href="style.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
   <!-- Import TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.1.2/dist/tf.min.js"></script>
   <!-- Import tfjs-vis -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
-  <script src="sketch1.js"></script>
+  <script src="tensorcolor.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
   <style>
       .button {
         background-color: #4CAF50;
@@ -30,12 +35,9 @@
   </head>
   <body>
 
-    <h1>My model for prediction</h1>  
-    <h2>stuff are added from sketch1.js</h2>
-    <h2>press f12 to see loss and result</h2>
-    <button class="button" onclick="startTraining()">start training</button><br/>
-    <br/>
-
+  
+      <div id="root">
+    </div>
   
   </body>
  

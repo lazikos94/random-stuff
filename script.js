@@ -2,6 +2,11 @@ const Datastore = require('nedb');
 const cors = require('cors');
 const express = require('express');
 const fetch = require('node-fetch');
+var firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
 
 require('dotenv').config();
 

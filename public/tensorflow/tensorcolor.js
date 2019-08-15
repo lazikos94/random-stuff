@@ -93,8 +93,7 @@ function pickColor(){
 }
 
 function sendData() {
-let colorDatabase = database.ref('tensorcolors');
-
+  let colorDatabase = database.ref('tensorcolors');
   let data = {
     r: r,
     g: g,

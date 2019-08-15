@@ -3,7 +3,12 @@ const cors = require('cors');
 const express = require('express');
 const fetch = require('node-fetch');
 var firebase = require("firebase/app");
+const mongo = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+const mongoose = require('mongoose');
 
+const url_mongo = 'mongodb://localhost:27017/test';
 // Add the Firebase products that you want to use
 require("firebase/auth");
 require("firebase/firestore");
@@ -17,9 +22,47 @@ app.listen(port, ()=> console.log('listening'));
 app.use(express.static('public'));
 app.use(express.json({limit:'10mb'}));
 
+const mongodb = 'mongoDB';
 const database = new Datastore('database.db');
 database.loadDatabase();
 
+app.get('/mongoget',(request, response)=>{
+    MongoClient.connect(url_mongo,(err,client)=>{
+        assert.equal(null,err);
+        const db = client.db(mongodb);  
+    findDocuments(db,   () =>{
+      client.close();
+    });
+  
+    });                
+});
+
+const findDocuments = function(db, callback) {
+    // Get the documents collection
+    const collection = db.collection('data');
+    // Find some documents
+    collection.find({}).toArray(function(err, docs) {
+      assert.equal(err, null);
+      console.log("Found the following records");
+      console.log(docs)
+      callback(docs);
+    });
+}
+
+app.post('/mongopost',(request, response)=>{
+    const dbdata = request.body;  
+    MongoClient.connect(url_mongo,(err,client)=>{
+        assert.equal(null,err);
+        const db = client.db(mongodb);
+        // Get the documents collection
+        const collection = db.collection('data');
+        // Insert some documents
+        collection.insertMany(dbdata,(err, result) =>{
+        assert.equal(err, null);
+        console.log(result);
+        });
+    });     
+});
 app.get('/api',(request, response)=>{
     database.find({}, (err,data)=>{
         response.json(data);

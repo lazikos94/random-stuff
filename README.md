@@ -1,5 +1,6 @@
 # Collection of different Javascript projects
 Different files used for experimenting/learning/training with javascript and its different frameworks and apis, 
+
 includes some [tensorflow.js](https://www.tensorflow.org/js/) neural networks which are trained with pictures and numbers.<br/>
 
 Some files are created based on tutorials from the [TheCodingTrain](https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw)<br/>

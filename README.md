@@ -9,6 +9,8 @@ The databases that are used in most of the files are [neDB](https://github.com/l
 
 [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) is used to post and get stuff from the databases,<br/>
 
+The [p5.js](https://p5js.org/) library is used for most of the graphics on the scripts,
+
 also the [Dark Sky API](https://darksky.net/dev) is used to get weather information on the user's location
 
 and the [WTIA REST API](https://wheretheiss.at/) is used to get the live location of the ISS(International Space Station)

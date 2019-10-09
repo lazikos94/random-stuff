@@ -51,7 +51,6 @@ const images = [
     };
     const response = await fetch('/api', options);
     const json = await response.json();
-    console.log(json);
   });
 
   async function mongodb(){
@@ -64,7 +63,7 @@ const images = [
   document.getElementById('submit').addEventListener('click',async ()=>{
     const stuff = document.getElementById('input').value;
     const data = [{ 
-        "id" : `${stuff}`
+        "thought" : `${stuff}`
     }];
     const options = {
       method: 'POST',
@@ -75,19 +74,5 @@ const images = [
     };
     const response = await fetch('/mongopost', options);
     const json = await response.json();
-    console.log(json);
   });
-  /*fetch('rainbow.jpg')
-  .then(response => {
-    console.log(response);
-    return response.blob();
-  })
-  .then(blob => {
-    console.log(blob);
-    document.getElementById('rainbow').src = URL.createObjectURL(blob);
-  })
-  .catch(error => {
-    console.log('error!');
-    console.error(error);
-  });*/
   

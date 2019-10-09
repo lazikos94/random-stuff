@@ -16,9 +16,9 @@ require("firebase/firestore");
 require('dotenv').config();
 
 const app = express(); 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.use(cors());
-app.listen(port, ()=> console.log('listening'));
+app.listen(port, ()=> console.log('listening at port',port));
 app.use(express.static('public'));
 app.use(express.json({limit:'10mb'}));
 

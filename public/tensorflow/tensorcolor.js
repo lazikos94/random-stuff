@@ -25,7 +25,7 @@ function setup(){
     // Your web app's Firebase configuration
     //const apiKey = process.env.API_KEYfire;
     var firebaseConfig = {
-        apiKey: "AIzaSyCDHVV65Am-8y9OJsLXr90MmQCJSA7UM7w",
+        apiKey: "your key here",
         authDomain: "tensorcolors.firebaseapp.com",
         databaseURL: "https://tensorcolors.firebaseio.com",
         projectId: "tensorcolors",

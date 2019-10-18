@@ -15,6 +15,8 @@ also the [Dark Sky API](https://darksky.net/dev) is used to get weather informat
 
 and the [WTIA REST API](https://wheretheiss.at/) is used to get the live location of the ISS(International Space Station)
 
-There is a map element in some files. [OpenSteetMap](https://www.openstreetmap.org/) is used for displaying the map
+There is a map element in some files. [OpenSteetMap](https://www.openstreetmap.org/) is used for displaying the map,
+
+A [Reactjs](https://reactjs.org) project was added.At the moment its just for testing.
 
 Everything is run on a [node.js](https://nodejs.org/en/) + [express](https://expressjs.com/) server
